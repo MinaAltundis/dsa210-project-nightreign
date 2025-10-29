@@ -22,7 +22,7 @@ Elden Ring Nightreign is a roguelike action RPG where players complete multiple 
 
 This project aims to **identify and quantify the key factors that lead to successful runs** in Nightreign, providing data-driven insights for gameplay optimization. Understanding these patterns has practical value for improving my own performance and could reveal interesting behavioral patterns in roguelike gaming.
 
-### Game Context (For Non-Players)
+### Game Context
 
 To understand the dataset, here are the key game mechanics:
 
@@ -140,7 +140,10 @@ Data is collected **manually after each gaming session** using a structured spre
 1. **Expand dataset:**
    - Collect data from friends for comparative analysis
    
-3. **Practical applications:**
+2. **Practical applications:**
    - Real-time performance prediction tool
    - Personalized strategy recommendations
    - Extend to other roguelike games
+
+3. **Automated Data Collection**
+   - Data collection through in-game APIs such as Overwolf 
