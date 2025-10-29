@@ -36,7 +36,7 @@ To understand the dataset, here are the key game mechanics:
 
 - **Nightlords:** Eight powerful bosses that serve as the final challenge. Each has unique mechanics and weaknesses that need to be accomodated for (e.g., Gladius, Caligo, Fulghor).
 
-- - **Loot Quality:** A subjective score (1-5) I assign to evaluate the overall quality of items obtained during a run. This personal rating considers weapon effectiveness, useful passive abilities, and overall gear synergy for my playstyle, rather than in-game rarity tiers.
+-  **Loot Quality:** A subjective score (1-5) I assign to evaluate the overall quality of items obtained during a run. This personal rating considers weapon effectiveness, useful passive abilities, and overall gear synergy for my playstyle, rather than in-game rarity tiers.
 
 - **Game Modes:** 
   - *Normal:* Standard difficulty
