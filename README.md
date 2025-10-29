@@ -86,7 +86,7 @@ To understand the dataset, here are the key game mechanics:
 | `game_mode` | Categorical | Difficulty mode (normal, enhanced, deep_of_night1/2/3/4/5) |
 | `nightlord` | Categorical | Boss faced (Gladius, Caligo, Adel, Fulghor, Gnoster, Heolstor, Libra, Maris) |
 | `map` | Categorical | Map variant (base, crater, rotted_woods, mountaintop, noklateo) |
-| `run_outcome` | Categorical | Result (victory, final_day, second_day, first_day) |
+| `run_outcome` | Categorical | Result (ordered: victory > final_day > second_day > first_day) |
 | `evergaol_cleared` | Numeric | Number of optional challenges completed (0-7) |
 | `middle_castle_visited` | Boolean | Whether player visited middle castle |
 | `great_enemies_cleared` | Numeric | Number of great-enemies defeated |
@@ -135,6 +135,7 @@ Data is collected **manually after each gaming session** using a structured spre
 - **Single-player perspective:** No data from other players for comparison
 - **Manual collection:** Potential for recording errors
 - **Limited sample size:** Some categories have few observations
+- **Subjectivity of loot_quality_score:** The score is subjective and may vary by session or character, introducing personal bias.
 
 ### Future Directions
 1. **Expand dataset:**
