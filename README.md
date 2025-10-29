@@ -57,7 +57,7 @@ To understand the dataset, here are the key game mechanics:
    - Does visiting the middle castle increase success rates?
    - Does clearing more evergaols lead to better performance?
    - Do duo or trio teams have higher success rates?
-3. **Which character (Nightfarer) I perform best with, and does this vary by game mode or difficulty?**
+3. **Which character (Nightfarer) I perform best with, and does this vary by game mode or final boss (Nightlord)?**
 4. **Does session progression affect performance (warm-up effect)?**
    - Do I perform significantly better in later runs compared to my first run of each gaming session?
    - Is there an optimal "warm-up" period before peak performance?
