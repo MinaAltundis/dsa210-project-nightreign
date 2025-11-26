@@ -38,10 +38,8 @@ To understand the dataset, here are the key game mechanics:
 
 -  **Loot Quality:** A subjective score (1-5) I assign to evaluate the overall quality of items obtained during a run. This personal rating considers weapon effectiveness, useful passive abilities, and overall gear synergy for my playstyle, rather than in-game rarity tiers.
 
-- **Game Modes:** 
-  - *Normal:* Standard difficulty
-  - *Enhanced:* Increased challenge with better rewards
-  - *Deep of Night (1-5):* Progressively harder difficulty tiers with ranking systems
+- **Game Difficulties:** 
+  - *Deep of Night: Depth (1-5):* Progressively harder difficulty tiers with ranking systems
 
 - **Runes:** In-game currency earned by defeating enemies, used to level up the character (max level 15 per run).
 
@@ -57,7 +55,7 @@ To understand the dataset, here are the key game mechanics:
    - Does visiting the middle castle increase success rates?
    - Does clearing more evergaols lead to better performance?
    - Do duo or trio teams have higher success rates?
-3. **Which character (Nightfarer) I perform best with, and does this vary by game mode or final boss (Nightlord)?**
+3. **Which character (Nightfarer) I perform best with, and does this vary by game difficulty or final boss (Nightlord)?**
 4. **Does session progression affect performance (warm-up effect)?**
    - Do I perform significantly better in later runs compared to my first run of each gaming session?
    - Is there an optimal "warm-up" period before peak performance?
@@ -83,7 +81,7 @@ To understand the dataset, here are the key game mechanics:
 | `run_id` | Numeric | Unique identifier for each run |
 | `run_index_in_day` | Numeric | Position of run within gaming session |
 | `character` | Categorical | Character played (recluse, revenant, wylder, guardian) |
-| `game_mode` | Categorical | Difficulty mode (normal, enhanced, deep_of_night1/2/3/4/5) |
+| `difficulty` | Categorical | Difficulty mode (depth1/2/3/4/5) |
 | `nightlord` | Categorical | Boss faced (Gladius, Caligo, Adel, Fulghor, Gnoster, Heolstor, Libra, Maris) |
 | `map` | Categorical | Map variant (base, crater, rotted_woods, mountaintop, noklateo) |
 | `run_outcome` | Categorical | Result (ordered: victory > final_day > second_day > first_day) |
@@ -120,7 +118,7 @@ Data is collected **manually after each gaming session** using a structured spre
 - Generate hypotheses for statistical testing
 
 #### Planned Visualizations
-- Success rate by character, game mode, and difficulty
+- Success rate by character, difficulty, and difficulty
 - Performance metrics across `run_index_in_day` (warm-up analysis)
 - Correlation heatmaps between continuous variables
 - Box plots comparing strategic decisions (castle visits, evergaols)
