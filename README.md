@@ -36,6 +36,8 @@ To understand the dataset, here are the key game mechanics:
 
 - **Nightlords:** Eight powerful bosses that serve as the final challenge. Each has unique mechanics and weaknesses that need to be accomodated for (e.g., Gladius, Caligo, Fulghor).
 
+- **Enhanced Nightlords:** Harder versions of the standard Nightlords with increased health, damage, and altered attack patterns. These provide greater challenge and significantly increased difficulty.
+
 -  **Loot Quality:** A subjective score (1-5) I assign to evaluate the overall quality of items obtained during a run. This personal rating considers weapon effectiveness, useful passive abilities, and overall gear synergy for my playstyle, rather than in-game rarity tiers.
 
 - **Game Difficulties:** 
@@ -48,21 +50,22 @@ To understand the dataset, here are the key game mechanics:
 
 ## Research Questions
 
-1. **What factors most strongly predict run success?**
-   - Which variables have the highest correlation with achieving victory versus defeat?
-   - Can we build a predictive model to forecast run outcomes?
+1. **What factors influence how far I progress in a run?**
+   - Which variables most strongly predict progression through the stages (first_day → second_day → final_day → victory)?
+   - Can we build a model that forecasts expected progression or the likelihood of reaching the Nightlord and defeating it (victory)?
+   - What distinguishes early failures from near-victory runs?
 2. **How do strategic decisions impact run outcomes?**
-   - Does visiting the middle castle increase success rates?
-   - Does clearing more evergaols lead to better performance?
-   - Do duo or trio teams have higher success rates?
-3. **Which character (Nightfarer) I perform best with, and does this vary by game difficulty or final boss (Nightlord)?**
+   - How do middle-castle visits and evergaol-clearing decisions affect progression and final outcomes?
+   - Do duo or trio teams offer measurable advantages over one another?
+3. **Which character (Nightfarer) do I perform best with, and does this vary by game difficulty or final boss (Nightlord)?**
+   - Do enhanced Nightlords significantly reduce my victory probability compared to their standard versions?
 4. **Does session progression affect performance (warm-up effect)?**
    - Do I perform significantly better in later runs compared to my first run of each gaming session?
    - Is there an optimal "warm-up" period before peak performance?
    - At what run index does performance plateau or decline due to fatigue?
 5. **How do RNG and luck factors influence outcomes?**
-   - How does loot quality obtained correlate with final outcomes?
-   - Does map variance affect success rates?
+   - How strongly does loot quality correlate with progression and final results?
+   - Does map variation meaningfully affect success rates?
 ---
 
 ## Dataset
@@ -72,7 +75,7 @@ To understand the dataset, here are the key game mechanics:
 - **Collection Period:** September 2025 - Present
 - **Current Size:** 96 completed runs
 - **Target Size:** 200+ runs by project completion
-- **Variables:** 16 per run
+- **Variables:** 121 per run
 
 ### Variables
 
@@ -83,8 +86,9 @@ To understand the dataset, here are the key game mechanics:
 | `character` | Categorical | Character played (recluse, revenant, wylder, guardian) |
 | `difficulty` | Categorical | Difficulty mode (depth1/2/3/4/5) |
 | `nightlord` | Categorical | Boss faced (Gladius, Caligo, Adel, Fulghor, Gnoster, Heolstor, Libra, Maris) |
+|`enhanced` | Boolean | Whether the Nightlord is enhanced version |
 | `map` | Categorical | Map variant (base, crater, rotted_woods, mountaintop, noklateo) |
-| `run_outcome` | Categorical | Result (ordered: victory > final_day > second_day > first_day) |
+| `run_outcome` | Ordinal/Categorical | Result (ordered by progression: first_day < second_day < final_day < victory) |
 | `evergaol_cleared` | Numeric | Number of optional challenges completed (0-7) |
 | `middle_castle_visited` | Boolean | Whether player visited middle castle |
 | `great_enemies_cleared` | Numeric | Number of great-enemies defeated |
@@ -132,7 +136,7 @@ Data is collected **manually after each gaming session** using a structured spre
 ### Current Limitations
 - **Single-player perspective:** No data from other players for comparison
 - **Manual collection:** Potential for recording errors
-- **Limited sample size:** Some categories have few observations
+- **Limited sample size:** Some categories have few observations particularly enhanced Nightlords and maps other than base.
 - **Subjectivity of loot_quality_score:** The score is subjective and may vary by session or character, introducing personal bias.
 
 ### Future Directions
