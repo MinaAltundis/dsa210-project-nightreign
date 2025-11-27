@@ -38,8 +38,6 @@ To understand the dataset, here are the key game mechanics:
 
 - **Enhanced Nightlords:** Harder versions of the standard Nightlords with increased health, damage, and altered attack patterns. These provide greater challenge and significantly increased difficulty.
 
--  **Loot Quality:** A subjective score (1-5) I assign to evaluate the overall quality of items obtained during a run. This personal rating considers weapon effectiveness, useful passive abilities, and overall gear synergy for my playstyle, rather than in-game rarity tiers.
-
 - **Game Difficulties:** 
   - *Deep of Night: Depth (1-5):* Progressively harder difficulty tiers with ranking systems
 
@@ -52,20 +50,26 @@ To understand the dataset, here are the key game mechanics:
 
 1. **What factors influence how far I progress in a run?**
    - Which variables most strongly predict progression through the stages (first_day → second_day → final_day → victory)?
-   - Can we build a model that forecasts expected progression or the likelihood of reaching the Nightlord and defeating it (victory)?
+   - Can we build a model that forecasts expected run outcome?
    - What distinguishes early failures from near-victory runs?
-2. **How do strategic decisions impact run outcomes?**
-   - How do middle-castle visits and evergaol-clearing decisions affect progression and final outcomes?
-   - Do duo or trio teams offer measurable advantages over one another?
-3. **Which character (Nightfarer) do I perform best with, and does this vary by game difficulty or final boss (Nightlord)?**
-   - Do enhanced Nightlords significantly reduce my victory probability compared to their standard versions?
+2. **What is the optimal resource allocation strategy under time constraints?**
+   - **Time is limited in each run** - players must choose between:
+     - **Evergaols** (0-7): Provide combat buffs, consume moderate time
+     - **Great Enemies**: Drop valuable loot, consume time
+     - **Middle Castle**: Provides premium loot, but requires significant time investment
+   - Is there an optimal balance between these activities?
+   - Does the optimal strategy change by difficulty level or character?
+   - What's the point of diminishing returns for evergaol clearing?
+3. **Which character (Nightfarer) do I perform best with?**
+   - Does this vary by game difficulty or final boss (Nightlord)?
+   - Do certain characters benefit more from specific resource allocation strategies?
 4. **Does session progression affect performance (warm-up effect)?**
-   - Do I perform significantly better in later runs compared to my first run of each gaming session?
+   - Do I perform significantly better in later runs?
    - Is there an optimal "warm-up" period before peak performance?
    - At what run index does performance plateau or decline due to fatigue?
 5. **How do RNG and luck factors influence outcomes?**
-   - How strongly does loot quality correlate with progression and final results?
    - Does map variation meaningfully affect success rates?
+   - Can we quantify the impact of randomness versus player strategy?
 ---
 
 ## Dataset
@@ -73,9 +77,9 @@ To understand the dataset, here are the key game mechanics:
 ### Overview
 - **Source:** Personal gameplay data from Elden Ring Nightreign (FromSoftware, 2025)
 - **Collection Period:** September 2025 - Present
-- **Current Size:** 96 completed runs
+- **Current Size:** 121 completed runs
 - **Target Size:** 200+ runs by project completion
-- **Variables:** 121 per run
+- **Variables:** 16 per run
 
 ### Variables
 
@@ -94,7 +98,6 @@ To understand the dataset, here are the key game mechanics:
 | `great_enemies_cleared` | Numeric | Number of great-enemies defeated |
 | `enemies_cleared` | Numeric | Number of normal enemies defeated |
 | `team_type` | Categorical | Solo, duo, or trio |
-| `loot_quality_score` | Numeric | Quality of items obtained (1-5) |
 | `allies_rescued` | Numeric | Number of times teammates were revived |
 | `runes_obtained` | Numeric | In-game currency earned |
 | `level` | Numeric | Final character level reached (1-15) |
@@ -137,7 +140,6 @@ Data is collected **manually after each gaming session** using a structured spre
 - **Single-player perspective:** No data from other players for comparison
 - **Manual collection:** Potential for recording errors
 - **Limited sample size:** Some categories have few observations particularly enhanced Nightlords and maps other than base.
-- **Subjectivity of loot_quality_score:** The score is subjective and may vary by session or character, introducing personal bias.
 
 ### Future Directions
 1. **Expand dataset:**
