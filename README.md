@@ -58,6 +58,9 @@ To understand the dataset, here are the key game mechanics:
      - **Great Enemies**: Drop valuable loot, consume time
      - **Middle Castle**: Provides premium loot, but requires significant time investment
    - Is there an optimal balance between these activities?
+   - **Does team size affect optimal strategy?**
+     - Can trios split up to cover more content efficiently?
+     - Do duos need to be more selective about risk-taking?
    - Does the optimal strategy change by difficulty level or character?
    - What's the point of diminishing returns for evergaol clearing?
 3. **Which character (Nightfarer) do I perform best with?**
