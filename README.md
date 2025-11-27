@@ -91,11 +91,11 @@ To understand the dataset, here are the key game mechanics:
 | `run_id` | Numeric | Unique identifier for each run |
 | `run_index_in_day` | Numeric | Position of run within gaming session |
 | `character` | Categorical | Character played (recluse, revenant, wylder, guardian) |
-| `difficulty` | Categorical | Difficulty mode (depth1/2/3/4/5) |
+| `difficulty` | Ordinal | Difficulty level (ordered: depth1 < depth2 < depth3 < depth4 < depth5) |
 | `nightlord` | Categorical | Boss faced (Gladius, Caligo, Adel, Fulghor, Gnoster, Heolstor, Libra, Maris) |
 |`enhanced` | Boolean | Whether the Nightlord is enhanced version |
 | `map` | Categorical | Map variant (base, crater, rotted_woods, mountaintop, noklateo) |
-| `run_outcome` | Ordinal/Categorical | Result (ordered by progression: first_day < second_day < final_day < victory) |
+| `run_outcome` | Ordinal | Result (ordered by progression: first_day < second_day < final_day < victory) |
 | `evergaol_cleared` | Numeric | Number of optional challenges completed (0-7) |
 | `middle_castle_visited` | Boolean | Whether player visited middle castle |
 | `great_enemies_cleared` | Numeric | Number of great-enemies defeated |
