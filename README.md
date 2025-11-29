@@ -461,6 +461,22 @@ Difficulty progression shows expected patterns with performance declining as dep
 3. **Automated Data Collection**
    - Data collection through in-game APIs such as Overwolf 
 
+
+## Installation & Setup
+```bash
+# Clone the repository
+git clone https://github.com/MinaAltundis/dsa210-project-nightreign.git
+cd dsa210-nightreign-analysis
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Launch Jupyter Notebook
+jupyter notebook notebooks/01_eda_hypothesis_testing.ipynb
+```
+
+
+**Requirements:** Python 3.8+
 ## Academic Integrity
 
 📄 **[View Complete Academic Integrity & AI Disclosure](ACADEMIC_INTEGRITY.md)**
