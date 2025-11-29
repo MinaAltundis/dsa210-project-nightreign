@@ -8,11 +8,12 @@
 
 ## Table of Contents
 - [Motivation](#motivation)
-- [Research Questions](#research-questions)
+- [Research Framework](#research-framework)
 - [Dataset](#dataset)
 - [Data Collection](#data-collection)
-- [Planned Analysis](#planned-analysis)
-- [Limitations and Future Work](#limitations-and-future-work)
+- [Analysis Methodology](#analysis-methodology)
+- [Key Findings](#key-findings)
+- [Project Structure](#project-structure)
 
 ---
 
@@ -30,13 +31,14 @@ To understand the dataset, here are the key game mechanics:
 
 - **Nightfarers (Characters):** Players choose from 8 unique characters, each with different abilities. Examples: Recluse (magic user), Revenant (summoner), Wylder (all-rounder), Guardian (tank).
 
-- **Evergaols:** Optional mini-dungeons scattered across the map. Clearing them provides powerful rewards but consumes time and resources. Players must decide how many to attempt (0-7 per run).
+- **Evergaols (0-7):** Optional mini-dungeons providing combat buffs. High time investment, defensive benefits.
 
-- **Middle Castle:** A central landmark containing valuable loot and upgrades. Visiting requires deviating from the optimal path but offers significant rewards.
+- **Great Enemies:** Elite enemies dropping valuable loot. Moderate time cost, offensive benefits.
+
+- **Middle Castle:** Central landmark with premium upgrades. Highest time cost, strongest rewards.
 
 - **Nightlords:** Eight powerful bosses that serve as the final challenge. Each has unique mechanics and weaknesses that need to be accomodated for (e.g., Gladius, Caligo, Fulghor).
-
-- **Enhanced Nightlords:** Harder versions of the standard Nightlords with increased health, damage, and altered attack patterns. These provide greater challenge and significantly increased difficulty.
+- **Enhanced versions** available with increased difficulty
 
 - **Game Difficulties:** 
   - *Deep of Night: Depth (1-5):* Progressively harder difficulty tiers with ranking systems
@@ -44,35 +46,118 @@ To understand the dataset, here are the key game mechanics:
 - **Runes:** In-game currency earned by defeating enemies, used to level up the character (max level 15 per run).
 
 - **Team Composition:** Players can tackle runs solo, in duos, or trios, either with friends or random matchmaking.
+- ### Data Overview
+
+
+
+Here's what my gameplay data looks like:
+
+
+
+<div align="center">
+
+  
+
+![Outcome Distribution](results/figures/01_outcome_distribution.png)
+
+*Figure 1: Distribution of run outcomes showing progression through game stages*
+
+
+
+![Continuous Distributions](results/figures/04_continuous_distributions.png)
+
+*Figure 2: Key performance metrics across all runs*
+
+
+
+</div>
 ---
 
-## Research Questions
+## Research Framework
 
-1. **What factors influence how far I progress in a run?**
-   - Which variables most strongly predict progression through the stages (first_day → second_day → final_day → victory)?
-   - Can we build a model that forecasts expected run outcome?
-   - What distinguishes early failures from near-victory runs?
-2. **What is the optimal resource allocation strategy under time constraints?**
-   - **Time is limited in each run** - players must choose between:
-     - **Evergaols** (0-7): Provide combat buffs, consume moderate time
-     - **Great Enemies**: Drop valuable loot, consume time
-     - **Middle Castle**: Provides premium loot, but requires significant time investment
-   - Is there an optimal balance between these activities?
-   - **Does team size affect optimal strategy?**
-     - Can trios split up to cover more content efficiently?
-     - Do duos need to be more selective about risk-taking?
-   - Does the optimal strategy change by difficulty level or character?
-   - What's the point of diminishing returns for evergaol clearing?
-3. **Which character (Nightfarer) do I perform best with?**
-   - Does this vary by game difficulty or final boss (Nightlord)?
-   - Do certain characters benefit more from specific resource allocation strategies?
-4. **Does session progression affect performance (warm-up effect)?**
-   - Do I perform significantly better in later runs?
-   - Is there an optimal "warm-up" period before peak performance?
-   - At what run index does performance plateau or decline due to fatigue?
-5. **How do RNG and luck factors influence outcomes?**
-   - Does map variation meaningfully affect success rates?
-   - Can we quantify the impact of randomness versus player strategy?
+
+
+### Primary Research Question
+
+**How can I optimize resource allocation under time constraints to maximize progression in Elden Ring Nightreign?**
+
+
+
+This project transforms traditional gaming performance analysis into a strategic optimization problem, examining:
+
+
+
+### Specific Research Questions
+
+
+
+1. **Session Progression Effects (Warm-up & Fatigue)**
+
+   - Does performance improve after initial runs (warm-up effect)?
+
+   - Does performance decline in extended sessions (fatigue effect)?
+
+   - What is the optimal session length?
+
+
+
+2. **Optimal Evergaol Strategy**
+
+   - Is there a "sweet spot" for evergaol clearing, or is more always better?
+
+   - Do diminishing returns exist beyond a certain threshold?
+
+   - What's the optimal balance between buff acquisition and time management?
+
+
+
+3. **Resource Allocation Trade-offs**
+
+   - What's the optimal distribution between evergaols, great enemies, and middle castle?
+
+   - Which strategies consistently lead to higher progression?
+
+   - How do resource allocation strategies compare in win rate and progression?
+
+
+
+4. **Strategy Adaptation by Team Size**
+
+   - Does optimal strategy differ between duo and trio compositions?
+
+   - Can trios leverage splitting up to pursue aggressive strategies?
+
+   - Should duos be more conservative due to coordination constraints?
+
+
+
+5. **Character Performance Analysis**
+
+   - Which character yields the best performance for my playstyle?
+
+   - Does character choice significantly impact outcomes?
+
+   - Do certain characters synergize better with specific strategies?
+
+
+
+6. **Difficulty Progression Validation**
+
+   - Does performance decline as expected with increasing difficulty?
+
+   - Are difficulty tiers properly calibrated?
+
+   - How does enhanced nightlord difficulty compare to standard versions?
+
+
+
+7. **Skill vs Luck Decomposition**
+
+   - What percentage of performance variance is due to controllable factors (strategy, decisions)?
+
+   - What percentage is due to RNG factors (map, nightlord, enhanced status)?
+
+   - Can we quantify the impact of player skill versus random chance?
 ---
 
 ## Dataset
@@ -82,7 +167,7 @@ To understand the dataset, here are the key game mechanics:
 - **Collection Period:** September 2025 - Present
 - **Current Size:** 121 completed runs
 - **Target Size:** 200+ runs by project completion
-- **Variables:** 16 per run
+- **Variables:** 17 base variables + 16 engineered features
 
 ### Variables
 
@@ -105,37 +190,257 @@ To understand the dataset, here are the key game mechanics:
 | `runes_obtained` | Numeric | In-game currency earned |
 | `level` | Numeric | Final character level reached (1-15) |
 
+### Engineered Features
+
+
+
+Created 16 additional features for enhanced analysis:
+
+
+
+**Ordinal Conversions:**
+
+- `run_outcome_ordinal` (0-3): Numeric progression scale
+
+- `difficulty_ordinal` (1-5): Numeric difficulty scale
+
+
+
+**Binary Indicators:**
+
+- `victory_binary`: Success indicator (1 = victory, 0 = defeat)
+
+- `final_day_reached`: Whether reached final boss
+
+- `middle_castle_visited` (already boolean)
+
+
+
+**Strategic Categories:**
+
+- `evergaol_category`: Low (0-2), Medium (3-4), High (5-7)
+
+- `strategy_type`: buff_focused, loot_focused, high_risk_castle, speedrun
+
+
+
+**Performance Metrics:**
+
+- `victory_binary`, `efficiency_ratio`, `runes_per_level`, `rescue_rate`
+
+- `team_strategy_combo`, `total_content_cleared`, `resource_intensity`
 
 ---
 
 ## Data Collection
 
 ### Collection Method
-Data is collected **manually after each gaming session** using a structured spreadsheet template.
+Data is collected **manually after each gaming session** using a structured Google Sheets template.
 
 ### Process
-**Post-run:** Data is provided by the game through the log system.
+1. **During gameplay:** Focus on performance without interruption
+
+2. **Post-run:** Record metrics from in-game log system
+
+3. **Session end:** Review and validate entries for consistency
+
+4. **Weekly:** Export to CSV for analysis
 
 ---
 
-## Planned Analysis
+## Analysis Methodology
+
+### 1. Data Preprocessing
+- **Ordinal conversions:** Map categorical outcomes to numeric scales
+- **Feature engineering:** Create 16 strategic and performance features
+- **Data validation:** Handle missing values, check for duplicates
+- **Quality checks:** Ensure consistency across all variables
+
+### 2. Exploratory Data Analysis (EDA)
+
+Comprehensive visualization suite examining distributions, relationships, and strategic patterns:
 
 
-#### Objectives
-- Understand distributions of all variables
-- Identify patterns and anomalies
-- Visualize relationships between key variables
-- Generate hypotheses for statistical testing
 
-#### Planned Visualizations
-- Success rate by character, difficulty, and difficulty
-- Performance metrics across `run_index_in_day` (warm-up analysis)
-- Correlation heatmaps between continuous variables
-- Box plots comparing strategic decisions (castle visits, evergaols)
-- Time series of performance over gaming sessions
+<div align="center">
 
 
-----
+
+![Correlation Heatmap](results/figures/05_correlation_heatmap.png)
+
+*Figure 6: Correlation matrix revealing relationships between key variables*
+
+
+
+![Resource Allocation Patterns](results/figures/07_resource_allocation_scatter.png)
+
+*Figure 7: Strategic resource allocation patterns*
+
+
+
+![Strategy Performance](results/figures/13_strategy_performance.png)
+
+*Figure 8: Performance comparison across resource allocation strategies*
+
+
+
+</div>
+
+### 3. Hypothesis Testing (7 Tests)
+
+**Test 1: Session Progression Effects**
+- Methods: Mann-Whitney U (warm-up & fatigue), Spearman correlation, Kruskal-Wallis
+- Compares: First vs later runs, early vs late runs, overall session trend
+- Goal: Identify optimal session length and warm-up requirements
+
+**Test 2: Optimal Evergaol Strategy**
+- Methods: Kruskal-Wallis H-test, Polynomial regression
+- Compares: Low (0-2), Medium (3-4), High (5-7) evergaol strategies
+- Goal: Find sweet spot and test for diminishing returns
+
+**Test 3: Resource Allocation Trade-offs**
+- Methods: Kruskal-Wallis H-test, Post-hoc Mann-Whitney U with Bonferroni correction
+- Compares: buff_focused, loot_focused, high_risk_castle, speedrun strategies
+- Goal: Identify optimal resource allocation pattern
+
+**Test 4: Strategy × Team Size Interaction**
+- Methods: Two-way Kruskal-Wallis, Stratified analysis
+- Compares: Optimal strategies for duo vs trio teams
+- Goal: Determine if team size requires strategy adaptation
+
+**Test 5: Character Performance**
+- Methods: Kruskal-Wallis H-test, Effect size analysis
+- Compares: Performance across all playable characters
+- Goal: Identify best-performing character for playstyle
+
+**Test 6: Difficulty Progression Validation**
+- Methods: Spearman correlation, Kruskal-Wallis across difficulty tiers
+- Compares: Performance across depth1-5 difficulties
+- Goal: Validate difficulty scaling and progression
+
+**Test 7: Skill vs Luck Decomposition**
+- Methods: Variance decomposition, R² comparison
+- Compares: Controllable factors vs RNG factors
+- Goal: Quantify player agency in performance outcomes
+
+### Statistical Standards
+- **Significance level:** α = 0.05
+- **Effect sizes:** Cohen's d for magnitude interpretation
+- **Corrections:** Bonferroni for multiple comparisons
+- **Visualization:** Publication-quality figures for all tests
+
+---
+
+## Key Findings
+
+### 🎯 Main Results
+
+#### **1. Resource Allocation Optimization**
+
+<div align="center">
+
+![Resource Allocation Results](results/figures/test3_resource_allocation.png)
+*Figure 9: Optimal resource allocation strategy comparison*
+
+</div>
+
+- **Optimal strategy:** Buff-focused (clearing 5-7 evergaols)
+- **Performance:** 2.47 mean progression vs 0.56 for speedrun
+- **Key insight:** Investing in buffs yields 4.4× better progression than rushing
+
+**Supporting Evidence:**
+
+<div align="center">
+
+![Evergaol Optimization](results/figures/test2_evergaol_optimization.png)
+*Figure 10: Sweet spot analysis for evergaol clearing*
+
+</div>
+
+---
+
+#### **2. Team Size Matters**
+
+<div align="center">
+
+![Team Strategy Interaction](results/figures/test4_team_strategy_interaction.png)
+*Figure 11: Strategy effectiveness varies by team composition*
+
+</div>
+
+- **Duo optimal:** Loot-focused strategy
+- **Trio optimal:** Buff-focused strategy (can split up efficiently)
+- **Strategic implication:** Team composition requires tactical adaptation
+
+---
+
+#### **3. No Warm-up or Fatigue Effects Detected**
+
+<div align="center">
+
+![Warm-up and Fatigue Analysis](results/figures/test1_warmup_fatigue.png)
+*Figure 12: Session progression analysis across run indices*
+
+</div>
+
+- **Warm-up test:** p = 0.616 (not significant)
+- **Fatigue test:** p = 0.465 (not significant)
+- **Practical recommendation:** No need for warm-up runs, consistent performance throughout sessions
+
+---
+
+#### **4. Character Selection**
+
+<div align="center">
+
+![Character Performance](results/figures/test5_character_performance.png)
+*Figure 13: Performance comparison across playable characters*
+
+</div>
+
+- **Best performer:** Guardian (2.29 mean progression)
+- **Statistical significance:** p = 0.056 (marginally non-significant)
+- **Interpretation:** Character choice has limited impact; strategy matters more
+
+---
+
+#### **5. Skill vs Luck Balance**
+
+<div align="center">
+
+![Skill vs Luck Decomposition](results/figures/test7_skill_vs_luck.png)
+*Figure 14: Variance decomposition into controllable vs random factors*
+
+</div>
+
+- **Controllable factors (skill):** 67.3% of variance
+- **RNG factors (luck):** 32.7% of variance
+- **Implication:** Player decisions dominate outcomes, but randomness still matters
+
+---
+
+#### **6. Additional Insights**
+
+<div align="center">
+
+![Difficulty Validation](results/figures/test6_difficulty_validation.png)
+*Figure 15: Performance scaling across difficulty tiers*
+
+</div>
+
+Difficulty progression shows expected patterns with performance declining as depth increases.
+
+---
+
+### 📊 Actionable Recommendations
+
+1. **Use Buff-Focused strategy:** Clear 5-7 evergaols for optimal progression
+2. **Adapt to team size:** Switch strategies based on duo vs trio composition
+3. **Play Guardian character:** Slight performance edge, though not decisive
+4. **No warm-up needed:** Jump directly into serious attempts
+5. **Focus on strategy over character:** Resource allocation matters more than character selection
+
+---
 
 ## Limitations and Future Work
 
