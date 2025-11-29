@@ -14,9 +14,6 @@
 - [Analysis Methodology](#analysis-methodology)
 - [Key Findings](#key-findings)
 - [Project Structure](#project-structure)
-- ## Academic Integrity
-
-📄 **[View Complete Academic Integrity & AI Disclosure](ACADEMIC_INTEGRITY.md)**
 
 ---
 
@@ -463,3 +460,7 @@ Difficulty progression shows expected patterns with performance declining as dep
 
 3. **Automated Data Collection**
    - Data collection through in-game APIs such as Overwolf 
+
+## Academic Integrity
+
+📄 **[View Complete Academic Integrity & AI Disclosure](ACADEMIC_INTEGRITY.md)**
