@@ -89,7 +89,7 @@ In accordance with academic integrity guidelines, I disclose the following use o
 
 To clarify the boundaries of AI assistance, the following elements are **entirely my own work**:
 
-- **Data Collection:** 121 runs of gameplay data manually recorded across multiple sessions  
+- **Data Collection:** 146 runs of gameplay data manually recorded across multiple sessions  
 - **Research Questions:** All 7 research questions and hypotheses formulated by me based on gaming experience  
 - **Analysis Design:** Overall optimization framework and study structure  
 - **Strategic Framework:** Reframing project as resource allocation optimization problem  
@@ -147,7 +147,7 @@ All analysis decisions, statistical interpretations, and conclusions are my inde
 
 **Game & Data Source:**
 - Elden Ring Nightreign © FromSoftware, Inc. / Bandai Namco Entertainment
-- Personal gameplay data (121 runs, September-November 2025)
+- Personal gameplay data (146 runs, September-December 2025)
 - In-game statistics and log systems
 
 **Statistical Methods:**
