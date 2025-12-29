@@ -397,7 +397,7 @@ Comprehensive visualization suite examining distributions, relationships, and st
 ---
 
 #### **4. Character Selection**
-
+ 
 <div align="center">
 
 ![Character Performance](results/figures/test5_character_performance.png)
